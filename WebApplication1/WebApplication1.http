@@ -1,6 +1,30 @@
 @WebApplication1_HostAddress = http://localhost:5055
 
-GET {{WebApplication1_HostAddress}}/weatherforecast/
+POST {{WebApplication1_HostAddress}}/api/prescriptions
+Content-Type: application/json
 Accept: application/json
 
-###
+{
+  "patient": {
+    "firstName": "Anna",
+    "lastName": "Kowalska",
+    "birthdate": "1992-04-10"
+  },
+  "doctor": {
+    "doctorId": 1
+  },
+  "medicaments": [
+    {
+      "medicamentId": 2,
+      "dose": 1,
+      "details": "Stosować raz dziennie po posiłku"
+    },
+    {
+      "medicamentId": 3,
+      "dose": 2,
+      "details": "Stosować dwa razy dziennie przed snem"
+    }
+  ],
+  "date": "2024-05-18",
+  "dueDate": "2024-06-18"
+}

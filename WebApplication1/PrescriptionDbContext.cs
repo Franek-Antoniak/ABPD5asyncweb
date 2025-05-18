@@ -17,31 +17,31 @@ public class PrescriptionDbContext : DbContext
     {
         // PrescriptionMedicament - klucz złożony (PK)
         modelBuilder.Entity<PrescriptionMedicament>()
-            .HasKey(pm => new { pm.IdPrescription, pm.IdMedicament });
+            .HasKey(pm => new { IdPrescription = pm.PrescriptionId, IdMedicament = pm.MedicamentId });
 
         // PrescriptionMedicament - relacja z Prescription (FK)
         modelBuilder.Entity<PrescriptionMedicament>()
             .HasOne(pm => pm.Prescription)
             .WithMany(p => p.PrescriptionMedicaments)
-            .HasForeignKey(pm => pm.IdPrescription);
+            .HasForeignKey(pm => pm.PrescriptionId);
 
         // PrescriptionMedicament - relacja z Medicament (FK)
         modelBuilder.Entity<PrescriptionMedicament>()
             .HasOne(pm => pm.Medicament)
             .WithMany(m => m.PrescriptionMedicaments)
-            .HasForeignKey(pm => pm.IdMedicament);
+            .HasForeignKey(pm => pm.MedicamentId);
 
         // Prescription - relacja z Patient (FK)
         modelBuilder.Entity<Prescription>()
             .HasOne(p => p.Patient)
             .WithMany(pa => pa.Prescriptions)
-            .HasForeignKey(p => p.IdPatient);
+            .HasForeignKey(p => p.PatientId);
 
         // Prescription - relacja z Doctor (FK)
         modelBuilder.Entity<Prescription>()
             .HasOne(p => p.Doctor)
             .WithMany(d => d.Prescriptions)
-            .HasForeignKey(p => p.IdDoctor);
+            .HasForeignKey(p => p.DoctorId);
     }
 }
 
